@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Switcher in JS</title>
+    <link rel="icon" href="./assets/images/logo.png" type="image/x-icon" />
+  </head>
+  <body id="bd">
+    <div id="md1">
+      <img id="imge" alt="Car image" /><br />
+      <div id="buttonContainer">
+        <button id="btn1" onclick="img1()">Prabhas</button>
+        <button id="btn2" onclick="img2()">Allu Arjun</button>
+        <button id="btn3" onclick="img3()">NTR</button>
+      </div>
+    </div>
+    <script>
+      // Style the body and html to prevent scrolling
+      let b = document.getElementById("bd");
+      document.documentElement.style.overflow = "hidden"; // Prevent scrolling on the page
+      document.body.style.overflow = "hidden"; // Prevent scrolling on the page
+      b.style.background = "white";
+      b.style.height = "100vh";
+      b.style.width = "100vw";
+      b.style.display = "flex";
+      b.style.direction = "column";
+      b.style.justifyContent = "center";
+      b.style.alignItems = "center";
+
+      // Style the main container
+      let md = document.getElementById("md1");
+      md.style.background = "grey";
+      md.style.height = "300px";
+      md.style.width = "300px";
+      md.style.padding = "30px";
+      md.style.border = "2px solid black";
+      md.style.borderRadius = "10px";
+      md.style.display = "flex";
+      md.style.flexDirection = "column";
+      md.style.alignItems = "center";
+      md.style.gap = "20px";
+
+      // Style the button container
+      let buttonContainer = document.getElementById("buttonContainer");
+      buttonContainer.style.display = "flex";
+      buttonContainer.style.justifyContent = "center";
+      buttonContainer.style.gap = "15px";
+      buttonContainer.style.width = "100%";
+
+      // Style the image
+      let image = document.getElementById("imge");
+      image.setAttribute("src", "./assets/images/tollywood.jpg");
+      image.style.width = "300px";
+      image.style.height = "200px";
+      image.style.objectFit = "cover";
+      image.style.boxShadow = "10px 10px 20px";
+      image.style.borderRadius = "10px";
+
+      // Style all buttons
+      const buttons = document.querySelectorAll("button");
+      buttons.forEach((button) => {
+        button.style.borderRadius = "5px";
+        button.style.padding = "8px 15px";
+        button.style.border = "none";
+        button.style.backgroundColor = "blue";
+        button.style.color = "white";
+        button.style.cursor = "pointer";
+        button.style.fontWeight = "bold";
+        button.style.transition = "all 0.3s ease";
+
+        // Add focus event listener
+        button.addEventListener("focus", () => {
+          button.style.outline = "3px solid #45a049";
+          button.style.backgroundColor = "#45a049";
+          button.style.transform = "scale(1.05)";
+        });
+
+        // Add blur event listener
+        button.addEventListener("blur", () => {
+          button.style.outline = "none";
+          button.style.backgroundColor = "red";
+          button.style.transform = "scale(1)";
+        });
+
+        // Add mousedown event listener
+        button.addEventListener("mousedown", () => {
+          button.style.transform = "scale(0.95)";
+        });
+
+        // Add mouseup event listener
+        button.addEventListener("mouseup", () => {
+          button.style.transform = "scale(1)";
+        });
+      });
+
+      // Handle keyboard navigation
+      document.addEventListener("keydown", (e) => {
+        switch (e.key) {
+          case "1":
+            img1();
+            document.getElementById("btn1").focus();
+            break;
+          case "2":
+            img2();
+            document.getElementById("btn2").focus();
+            break;
+          case "3":
+            img3();
+            document.getElementById("btn3").focus();
+            break;
+        }
+      });
+
+      // Image switching functions
+      img1 = () => {
+        image.setAttribute("src", "./assets/images/Prabhas.jpg");
+      };
+      img2 = () => {
+        image.setAttribute("src", "./assets/images/AA.jpg");
+      };
+      img3 = () => {
+        image.setAttribute("src", "./assets/images/ntr.jpg");
+      };
+    </script>
+  </body>
+</html>

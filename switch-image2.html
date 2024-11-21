@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Car Image Switcher</title>
+    <link rel="icon" href="./assets/images/logo.png" type="image/x-icon" />
+  </head>
+  <body id="bd">
+    <div id="md1">
+      <div id="carContainer">
+        <div class="car-column">
+          <img class="car-image" alt="Car image 1" />
+          <button id="btn1" onclick="showCars(1)">CAR - 1</button>
+        </div>
+        <div class="car-column">
+          <img class="car-image" alt="Car image 2" />
+          <button id="btn2" onclick="showCars(2)">CAR - 2</button>
+        </div>
+        <div class="car-column">
+          <img class="car-image" alt="Car image 3" />
+          <button id="btn3" onclick="showCars(3)">CAR - 3</button>
+        </div>
+      </div>
+    </div>
+    <script>
+      const carSets = {
+        1: [
+          "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=500&auto=format",
+          "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=500&auto=format",
+          "https://images.unsplash.com/photo-1525609004556-c46c7d6cf023?w=500&auto=format",
+        ],
+        2: [
+          "https://images.unsplash.com/photo-1555353540-64580b51c258?w=500&auto=format",
+          "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=500&auto=format",
+          "https://images.unsplash.com/photo-1542362567-b07e54358753?w=500&auto=format",
+        ],
+        3: [
+          "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=500&auto=format",
+          "https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=500&auto=format",
+          "https://images.unsplash.com/photo-1553440569-bcc63803a83d?w=500&auto=format",
+        ],
+      };
+
+      // Style the body
+      let b = document.getElementById("bd");
+      b.style.background = "lightgrey";
+      b.style.margin = "0";
+      b.style.padding = "0";
+      b.style.height = "100vh";
+      b.style.width = "100vw";
+      b.style.display = "flex";
+      b.style.justifyContent = "center";
+      b.style.alignItems = "center";
+      b.style.overflow = "hidden";
+
+      // Style the main container
+      let md = document.getElementById("md1");
+      md.style.background = "grey";
+      md.style.width = "90vw";
+      md.style.maxWidth = "1200px";
+      md.style.padding = "20px";
+      md.style.border = "2px solid black";
+      md.style.borderRadius = "10px";
+      md.style.display = "flex";
+      md.style.flexDirection = "column";
+      md.style.alignItems = "center";
+      md.style.boxSizing = "border-box";
+
+      // Style the car container
+      let carContainer = document.getElementById("carContainer");
+      carContainer.style.display = "flex";
+      carContainer.style.gap = "15px";
+      carContainer.style.justifyContent = "center";
+      carContainer.style.width = "100%";
+
+      // Style car columns
+      const carColumns = document.querySelectorAll(".car-column");
+      carColumns.forEach((column) => {
+        column.style.display = "flex";
+        column.style.flexDirection = "column";
+        column.style.alignItems = "center";
+        column.style.gap = "10px";
+        column.style.width = "30%";
+      });
+
+      // Style all images
+      const images = document.querySelectorAll(".car-image");
+      images.forEach((img) => {
+        img.style.width = "100%";
+        img.style.aspectRatio = "16/10";
+        img.style.objectFit = "cover";
+        img.style.boxShadow = "5px 5px 15px rgba(0,0,0,0.3)";
+        img.style.borderRadius = "10px";
+        img.style.transition = "all 0.3s ease";
+      });
+
+      // Style all buttons
+      const buttons = document.querySelectorAll("button");
+      buttons.forEach((button) => {
+        button.style.width = "80%";
+        button.style.borderRadius = "5px";
+        button.style.padding = "8px 15px";
+        button.style.border = "none";
+        button.style.backgroundColor = "#4CAF50";
+        button.style.color = "white";
+        button.style.cursor = "pointer";
+        button.style.fontWeight = "bold";
+        button.style.transition = "all 0.3s ease";
+
+        // Add hover effect
+        button.addEventListener("mouseenter", () => {
+          button.style.backgroundColor = "#45a049";
+          button.style.transform = "scale(1.05)";
+        });
+
+        button.addEventListener("mouseleave", () => {
+          button.style.backgroundColor = "#4CAF50";
+          button.style.transform = "scale(1)";
+        });
+
+        // Add click effect
+        button.addEventListener("mousedown", () => {
+          button.style.transform = "scale(0.95)";
+        });
+
+        button.addEventListener("mouseup", () => {
+          button.style.transform = "scale(1.05)";
+        });
+      });
+
+      // Handle keyboard navigation
+      document.addEventListener("keydown", (e) => {
+        switch (e.key) {
+          case "1":
+            showCars(1);
+            document.getElementById("btn1").focus();
+            break;
+          case "2":
+            showCars(2);
+            document.getElementById("btn2").focus();
+            break;
+          case "3":
+            showCars(3);
+            document.getElementById("btn3").focus();
+            break;
+        }
+      });
+
+      // Function to show cars
+      function showCars(setNumber) {
+        const images = document.querySelectorAll(".car-image");
+        images.forEach((img, index) => {
+          img.style.opacity = "0";
+          setTimeout(() => {
+            img.setAttribute("src", carSets[setNumber][index]);
+            img.style.opacity = "1";
+          }, 300);
+        });
+      }
+
+      // Initialize with first set of cars
+      showCars(1);
+    </script>
+  </body>
+</html>
